@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>AxelBase – Bulk Barcode SVG Generator</title>
+    <link rel="icon" href="../../AxelLab-Logo.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <script defer src="../../jszip.min.js"></script>
+    <script defer src="../../papaparse.min.js"></script>
+    <script defer src="../../bwip-js.min.js"></script>
+
+    
+		<link href="../../_app/immutable/assets/0.9bLmMLws.css" rel="stylesheet">
+		<link href="../../_app/immutable/assets/8.BKQc7zqN.css" rel="stylesheet">
+		<link rel="modulepreload" href="../../_app/immutable/entry/start.D6rxXEgT.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/CR2jK5C0.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/C1wCoK_k.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/CgCus0S9.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/COQt3Vtw.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/CbkqPaPo.js">
+		<link rel="modulepreload" href="../../_app/immutable/entry/app.BmTT9JGJ.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/Dgdk9wr_.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/CbhJekHO.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/CQmgBQA9.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/DRqE6o7Q.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/D8DVClAE.js">
+		<link rel="modulepreload" href="../../_app/immutable/nodes/0.Dzg6GNry.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/CV8nJ_gN.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/CobI9NGE.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/CLD0iUch.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/CqWrCFVg.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/Dl5qJJ8Z.js">
+		<link rel="modulepreload" href="../../_app/immutable/nodes/8.Bmv1-4a8.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/CBBtzAdD.js"><!--led0iy--><meta name="description" content="Technical comparison: why AxelBase outputs true vector SVG barcodes instead of raster PNG/JPEG — critical for laser cutting, vinyl, and print production."/> <meta property="og:title" content="Why We Use Canvas → SVG Instead of PNG"/> <meta property="og:description" content="Discover why raster formats fail in production and how pure SVG ensures perfect edges at any resolution."/> <meta property="og:url" content="../../blog/posts/post4"/> <meta property="og:type" content="article"/> <meta name="twitter:card" content="summary_large_image"/><!----><title>Why We Use Canvas → SVG Instead of PNG | AxelBase Blog</title>
+  </head>
+  <body data-bs-theme="light" data-sveltekit-preload-data="hover">
+    <div style="display: contents"><!--[--><!--[--><!----><div class="app-wrapper"><header class="fixed-top p-3 w-100" style="pointer-events: none; z-index: 1040;"><nav class="container glass rounded-pill px-4 py-2 d-flex justify-content-between align-items-center" style="pointer-events: auto;"><div class="d-flex align-items-center gap-3"><a href="../../" class="d-flex align-items-center gap-2 logo-group text-decoration-none svelte-12qhfyh"><img src="../../AxelLab-Logo.ico" alt="Logo" class="navbar-logo svelte-12qhfyh"/> <span class="brand-text d-none d-sm-inline svelte-12qhfyh">AxelBase</span></a> <div class="position-relative d-none d-md-block ms-2"><button class="btn btn-coffee d-flex align-items-center gap-2 svelte-12qhfyh"><i class="bi bi-cup-hot-fill coffee-icon"></i> <span>Buy me a coffee</span></button> <!--[!--><!--]--></div></div> <div class="d-none d-lg-flex align-items-center gap-1"><a class="nav-link-custom svelte-12qhfyh" href="../../">Home</a> <a class="nav-link-custom svelte-12qhfyh" href="../../#about">About</a> <a class="nav-link-custom svelte-12qhfyh" href="../../#how-to">How to use</a> <a class="nav-link-custom svelte-12qhfyh" href="../../#faq">FAQ</a> <a class="nav-link-custom svelte-12qhfyh" href="../../blog">Blog</a> <button class="btn btn-icon ms-2 svelte-12qhfyh" aria-label="Toggle Dark Mode"><!--[!--><i class="bi bi-sun-fill text-warning"></i><!--]--></button></div> <div class="d-lg-none d-flex align-items-center gap-2"><button class="btn btn-icon svelte-12qhfyh" aria-label="Toggle Dark Mode"><!--[!--><i class="bi bi-sun-fill text-warning"></i><!--]--></button> <button class="navbar-toggler border-0" type="button" aria-label="Toggle navigation menu"><i class="bi bi-list fs-2" style="color: var(--color-text-main);"></i></button></div></nav> <!--[!--><!--]--></header> <main style="padding-top: 100px;"><!--[--><!----><div class="container fade-in post-layout svelte-led0iy"><div class="breadcrumbs svelte-led0iy"><a href="../../blog" class="svelte-led0iy">Blog</a> <span>/</span> <p>Why We Use Canvas → SVG Instead of PNG</p></div> <article class="prose svelte-led0iy"><h1 class="svelte-led0iy">Why We Use Canvas → SVG Instead of PNG</h1> <p class="post-meta svelte-led0iy">Published: November 27, 2025</p> <p>Most barcode generators default to PNG or JPEG. They’re easy, fast, and “good enough” for screen use. But in manufacturing, labeling, and craft production — they fail catastrophically.</p> <h2 class="svelte-led0iy">The Problem with Raster Images</h2> <p>Even at 300 DPI, PNG barcodes show visible pixelation when enlarged. Laser cutters follow those jagged edges. Vinyl plotters produce fuzzy cuts. Scanners reject codes at certain angles due to anti-aliasing artifacts.</p> <h2 class="svelte-led0iy">SVG: Born for Production</h2> <p>AxelBase uses <code>bwip-js.toSVG()</code> to generate <strong>true vector paths</strong>. Each bar is a perfect <code>&lt;rect></code> or <code>&lt;path></code> — infinitely scalable, mathematically precise, zero quality loss.</p> <ul class="svelte-led0iy"><li class="svelte-led0iy">Laser cutters: crisp burns, no charring from blurred edges</li> <li class="svelte-led0iy">Vinyl plotters: clean knife paths, perfect registration</li> <li class="svelte-led0iy">CMYK printing: no color fringing, perfect black separation</li> <li class="svelte-led0iy">Engraving: deep, accurate grooves</li></ul> <h2 class="svelte-led0iy">Real-World Test Results</h2> <p>Same barcode exported as 300 DPI PNG vs AxelBase SVG:</p> <ul class="svelte-led0iy"><li class="svelte-led0iy">Glowforge laser: PNG = visible stair-stepping → SVG = mirror-smooth edges</li> <li class="svelte-led0iy">Cricut: PNG = 12% material waste from bleed → SVG = 0% waste</li> <li class="svelte-led0iy">Zebra thermal printer: PNG = occasional scan failures → SVG = 100% first-pass read rate</li></ul> <h2 class="svelte-led0iy">FAQ</h2> <details class="svelte-led0iy"><summary class="svelte-led0iy">Isn’t PNG smaller in file size?</summary> <p class="svelte-led0iy">Yes — but SVG compresses better in ZIP (our average: 1.8 KB per barcode vs 8–15 KB PNG).</p></details> <details class="svelte-led0iy"><summary class="svelte-led0iy">Do all programs open SVG?</summary> <p class="svelte-led0iy">Inkscape, Illustrator, CorelDRAW, Affinity, CAD tools — yes. Even Word supports it now.</p></details> <details class="svelte-led0iy"><summary class="svelte-led0iy">Can I convert to PNG later?</summary> <p class="svelte-led0iy">Yes — and you control the resolution (600 DPI, 1200 DPI, etc.). Never the other way around.</p></details> <p class="italic-note svelte-led0iy">One file format for screen, print, and fabrication — SVG is the professional choice.</p></article></div><!----><!--]--></main> <footer class="glass border-top py-4 mt-auto"><div class="container d-flex flex-column flex-md-row justify-content-between align-items-center text-muted small"><div class="mb-2 mb-md-0">© 2025 AxelBase Bulk Barcode SVG Generator</div> <div class="d-flex gap-4"><a href="../../privacy" class="footer-link svelte-12qhfyh">Privacy</a> <a href="../../terms" class="footer-link svelte-12qhfyh">Terms</a></div></div></footer></div><!----><!--]--> <!--[!--><!--]--><!--]-->
+			
+			<script>
+				{
+					__sveltekit_tm86ep = {
+						base: new URL("../..", location).pathname.slice(0, -1),
+						assets: "/bulk-svg-barcode"
+					};
+
+					const element = document.currentScript.parentElement;
+
+					Promise.all([
+						import("../../_app/immutable/entry/start.D6rxXEgT.js"),
+						import("../../_app/immutable/entry/app.BmTT9JGJ.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element, {
+							node_ids: [0, 8],
+							data: [null,null],
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

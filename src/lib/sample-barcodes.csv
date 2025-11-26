@@ -1,0 +1,7 @@
+type,value
+code128,1234567890ABC
+code39,TEST-12345
+ean13,5901234123457
+ean8,02345673
+upca,012345678905
+pdf417,This is a long PDF417 example that definitely works
