@@ -1,4 +1,4 @@
 User-agent: *
-Disallow:
+Allow: /
 
-Sitemap: https://axelbase.github.io/bulk-svg-barcode/sitemap.xml
+Sitemap: https://axelbase.github.io/arn-parser/sitemap.xml
