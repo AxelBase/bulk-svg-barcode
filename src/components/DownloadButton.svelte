@@ -6,10 +6,9 @@
   export let entries: { id: number; value: string }[] = [];
   export let type: string = 'code128';
   export let showText: boolean = true;
-  export let baseFilename: string = 'AxelBase - Bulk Barcode SVG Generator'; // base without .zip or number
+  export let baseFilename: string = 'AxelBase - Bulk Barcode SVG Generator';
 
   let librariesReady = false;
-  let buttonText = 'Loading libraries...';
 
   const formatType = (t: string): string => {
     const map: Record<string, string> = {
@@ -35,9 +34,6 @@
   });
 
   $: validCount = entries.filter(e => e.value?.trim()).length;
-  $: buttonText = librariesReady
-    ? `Download ${validCount} Barcode${validCount !== 1 ? 's' : ''} as ZIP`
-    : 'Loading libraries...';
 
   async function download() {
     if (!librariesReady || validCount === 0) return;
@@ -48,16 +44,18 @@
       try {
         const svgText = (window as any).bwipjs.toSVG({
           bcid:            type,
-          text:            entry.value,
-          scale:           4,
-          height:          15,
+          text:            entry.value.trim(),
+          scale:           3,              // Reduced scale for compact size
+          height:          12,             // 12mm height (~40–50mm wide for most codes)
           includetext:     showText,
           textxalign:      'center',
-          backgroundcolor: 'FFFFFF'
+          textyoffset:     showText ? 8 : 0,
+          backgroundcolor: 'FFFFFF',
+          paddingwidth:    5,              // Clean padding
+          paddingheight:   5
         });
 
         const safeName = `${formatType(type)} – Barcode ${i + 1}.svg`;
-
         zip.file(safeName, svgText);
       } catch (err) {
         console.warn('Skipped invalid barcode:', entry.value);
@@ -74,5 +72,9 @@
   on:click={download}
   disabled={!librariesReady || validCount === 0}
 >
-  {buttonText}
+  {#if librariesReady}
+    Download {validCount} Barcode{validCount !== 1 ? 's' : ''} as ZIP
+  {:else}
+    Loading libraries...
+  {/if}
 </button>

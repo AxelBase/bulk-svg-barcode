@@ -61,34 +61,45 @@
     return map[t.toLowerCase()] || t.toUpperCase();
   };
 
-  async function downloadCsvBatch(start: number) {
-    if (!window.JSZip || !(window as any).bwipjs?.toSVG) return;
+async function downloadCsvBatch(start: number) {
+  if (!window.JSZip || !(window as any).bwipjs?.toSVG) return;
 
-    const base = getZipBase();
-    const batchNum = Math.floor(start / 100) + 1;
-    const totalBatches = csvBatches.length;
-    const zipName = totalBatches > 1 ? `${base} - Batch ${batchNum} of ${totalBatches}` : base;
+  const base = getZipBase();
+  const batchNum = Math.floor(start / 100) + 1;
+  const totalBatches = csvBatches.length;
+  const zipName = totalBatches > 1 ? `${base} - Batch ${batchNum} of ${totalBatches}` : base;
 
-    const zip = new JSZip();
-    const batch = csvEntries.slice(start, start + 100);
+  const zip = new JSZip();
+  const batch = csvEntries.slice(start, start + 100);
 
-    batch.forEach((item, i) => {
-      try {
-        const svgText = (window as any).bwipjs.toSVG({
-          bcid: item.type, text: item.value, scale: 4, height: 15,
-          includetext: true, textxalign: 'center', backgroundcolor: 'FFFFFF'
-        });
-        const barcodeNumber = start + i + 1;
-        zip.file(`${formatType(item.type)} – Barcode ${barcodeNumber}.svg`, svgText);
-      } catch (e) {
-        console.warn('Skipped invalid barcode:', item.value);
-      }
-    });
+  batch.forEach((item, i) => {
+    try {
+      const svgText = (window as any).bwipjs.toSVG({
+        bcid:        item.type,
+        text:        item.value.trim(),
+        scale:       3,
+        height:      12,               // Compact, consistent size
+        includetext: true,
+        textxalign:  'center',
+        textyoffset: 8,
+        backgroundcolor: 'FFFFFF',
+        paddingwidth: 5,
+        paddingheight: 5
+      });
 
-    const blob = await zip.generateAsync({ type: 'blob' });
-    downloadBlob(blob, `${zipName}.zip`);
-    incrementDownloadCount();
-  }
+      const barcodeNumber = start + i + 1;
+      const safeName = `${formatType(item.type)} – Barcode ${barcodeNumber}.svg`;
+      zip.file(safeName, svgText);
+    } catch (e) {
+      console.warn('Skipped invalid barcode:', item.value);
+    }
+  });
+
+  const blob = await zip.generateAsync({ type: 'blob' });
+  downloadBlob(blob, `${zipName}.zip`);
+  incrementDownloadCount();
+}
+
 </script>
 
 <div class="container py-4">
