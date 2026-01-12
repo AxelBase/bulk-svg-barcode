@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://axelbase.github.io/bulk-svg-barcode/sitemap.xml
+Sitemap: https://bulk-svg-barcode.vercel.app/sitemap.xml

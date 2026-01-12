@@ -50,7 +50,7 @@
 
     <h5 class="mb-3">{$entries.length} / 100 barcodes</h5>
 
-    <div class="border rounded p-3 mb-4 bg-white" style="max-height: 420px; overflow-y: auto;">
+    <div class="border rounded p-3 mb-4" style="max-height: 420px; overflow-y: auto;">
       {#each $entries as entry (entry.id)}
         <BarcodeEntryRow
           bind:value={entry.value}
